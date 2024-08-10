@@ -4,6 +4,8 @@ import (
   "math/rand"
   "time"
   rl "github.com/gen2brain/raylib-go/raylib"
+  "os"
+  "fmt"
 )
 
 var opened = true
@@ -64,6 +66,11 @@ func draw(randomNumber int, randWidth int32, randHeight int32, randWidth2 int32,
 
 func main() {
 
+  homeDir, err := os.UserHomeDir()
+  if err != nil {
+    fmt.Println("FATAL: ", err)
+  }
+
   rand.Seed(time.Now().UnixNano())
 
 	rl.InitWindow(800, 800, "wise tree 2")
@@ -76,7 +83,7 @@ func main() {
 
   // Textures
 
-  image := rl.LoadImage("cokey.png")
+  image := rl.LoadImage(homeDir + "/wisetree2/cokey.png")
   rl.ImageResize(image, screenWidth, screenHeight)
 
   texture := rl.LoadTextureFromImage(image)
@@ -87,8 +94,8 @@ func main() {
 
   rl.InitAudioDevice()
 
-  bg := rl.LoadSound("roddy_rich_new_beat.wav")
-  scream := rl.LoadSound("mosquito.wav")
+  bg := rl.LoadSound(homeDir + "/wisetree2/roddy_rich_new_beat.wav")
+  scream := rl.LoadSound(homeDir + "/wisetree2/mosquito.wav")
 
 	rl.SetTargetFPS(60)
 
