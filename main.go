@@ -66,6 +66,19 @@ func draw(randomNumber int, randWidth int32, randHeight int32, randWidth2 int32,
 
 func main() {
 
+  var minimum int
+  var maximum int
+
+  fmt.Print("Minimum time (seconds brah): ")
+  fmt.Scan(&minimum)
+  fmt.Print("Maximum time (also seconds brah): ")
+  fmt.Scan(&maximum)
+
+  if minimum > maximum {
+    fmt.Println("Maximum lower than minimum value")
+    os.Exit(1)
+  }
+
   homeDir, err := os.UserHomeDir()
   if err != nil {
     fmt.Println("FATAL: ", err)
@@ -115,8 +128,7 @@ func main() {
     rnd = rand.Intn(2)
 
     var timer int
-    timer = timer + 30
-    timer = timer + rand.Intn(90)
+    timer = minimum + rand.Intn(maximum - minimum)
 
     rl.ToggleBorderlessWindowed()
     for opened {
